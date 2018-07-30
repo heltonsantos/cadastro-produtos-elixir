@@ -1,0 +1,6 @@
+<h2>Editar produto</h2>
+
+<%= render "form.html", changeset: @changeset,
+                        action: produto_path(@conn, :update, @produto) %>
+
+<span><%= link "Voltar", to: produto_path(@conn, :index) %></span>

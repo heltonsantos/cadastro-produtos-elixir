@@ -1,0 +1,41 @@
+<h2>Produtos</h2>
+ 
+<%= form_for @conn, produto_path(@conn, :index), [method: :get, class: "pull-right"], fn f -> %>
+  <%= search_input f, :query, class: "form-control" %>
+  <%= submit "Buscar", class: "btn btn-default btn-sm" %>
+<% end %>
+
+<span><%= link "Inicio", to: produto_path(@conn, :index) %></span>
+
+<table class="table">
+  <thead>
+    <tr>
+      <th>Sku</th>
+      <th>Nome</th>
+      <th>Descricao</th>
+      <th>Quantidade</th>
+      <th>Preco</th>
+
+      <th colspan="3">Ações</th>
+    </tr>
+  </thead>
+  <tbody>
+<%= for produto <- @produtos do %>
+    <tr>
+      <td><%= produto.sku %></td>
+      <td><%= produto.nome %></td>
+      <td><%= produto.descricao %></td>
+      <td><%= produto.quantidade %></td>
+      <td><%= produto.preco %></td>
+
+      <td class="text-right">
+        <span><%= link "Detalhar", to: produto_path(@conn, :show, produto), class: "btn btn-default btn-xs" %></span>
+        <span><%= link "Editar", to: produto_path(@conn, :edit, produto), class: "btn btn-default btn-xs" %></span>
+        <span><%= link "Deletar", to: produto_path(@conn, :delete, produto), method: :delete, data: [confirm: "Are you sure?"], class: "btn btn-danger btn-xs" %></span>
+      </td>
+    </tr>
+<% end %>
+  </tbody>
+</table>
+
+<span><%= link "Cadastrar produto", to: produto_path(@conn, :new) %></span>
